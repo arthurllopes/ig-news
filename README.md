@@ -10,6 +10,8 @@ Blog de notícias por assinatura. Desenvolvido durante o Ignite da Rocketseat (T
  - PrismicCMS para gerenciamento de conteúdo
  - Página de preview do conteúdo;
  
+https://user-images.githubusercontent.com/82395681/137013122-600bfded-a496-416c-b2b8-daf7ca52a74f.mp4
+
 
 ## 💻 Tecnologias
  - [React](https://pt-br.reactjs.org/)
