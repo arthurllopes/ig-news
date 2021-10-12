@@ -1,0 +1,56 @@
+.HeaderContainer{
+    height: 5rem;
+    border-bottom: 1px solid rgb(53, 52, 52);
+    margin: 0 auto;
+    padding: 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.HeaderContent{
+    max-width: 1120px;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+
+
+    nav {
+        margin-left: 3rem;
+        height: 5rem;
+        display: flex;
+
+        a{
+            display: inline-block;
+            position: relative;
+            padding: 0 .5rem;
+            height: 100%;
+            line-height: 5rem;
+            color: var(--gray-300);
+
+            transition: color .2s;
+
+            & + a {
+                margin-left: 2rem;
+            }
+
+            &:hover{
+                color: var(--white);
+            }
+            &.active{
+                color: var(--white);
+            }
+            &.active::after{
+                content: '';
+                height: 3px;
+                width: 100%;
+                border-radius: 3px 3px 0 0;
+                position: absolute;
+                bottom: 4px;
+                left: 2px;
+                background-color: var(--yellow-500);
+            }
+
+        }
+        
+    }
+}

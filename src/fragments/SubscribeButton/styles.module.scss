@@ -1,0 +1,19 @@
+.button {
+    background-color: var(--yellow-500);
+    border-radius: 2rem;
+    height: 4rem;
+    width: 260px;
+    padding: 2rem;
+    color: var(--gray-900);
+    margin-top: 2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all ease .2s;
+
+    &:hover{
+        filter: brightness(.8);
+    }
+}
