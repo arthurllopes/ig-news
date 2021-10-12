@@ -3,9 +3,10 @@ import Head from 'next/head'
 import styles from './index.module.scss'
 import { getPrismicClient } from '../../services/prismic'
 import Prismic from '@prismicio/client'
-import {RichText} from 'prismic-dom'
+import { RichText} from 'prismic-dom'
+import Link from "next/link"
 
-const posts = ({posts}) => {
+const Posts = ({posts}) => {
     return (
         <>
             <Head>
@@ -14,11 +15,13 @@ const posts = ({posts}) => {
             <main className={styles.container}>
                 <div className={styles.posts}>
                     {posts.map(post => (
-                        <a href="#" key={post.slug}>
-                            <time>{post.updatedAt}</time>
-                            <strong>{post.title}</strong>
-                            <p>{post.excerpt}</p>
-                        </a>
+                        <Link key={post.slug} href={`/posts/${post.slug}`}>
+                            <a>
+                                <time>{post.updatedAt}</time>
+                                <strong>{post.title}</strong>
+                                <p>{post.excerpt}</p>
+                            </a>
+                        </Link>
                     ))}
                 </div>
             </main>
@@ -30,11 +33,9 @@ export const getStaticProps = async () => {
     const prismic = getPrismicClient()
 
     const response = await prismic.query([
-        Prismic.predicates.at('document.type', 'post')
-    ], {
-        fetch: ['publication.type', 'publication.content'],
-        pageSize: 100
-    })
+        Prismic.predicates.at('document.type', 'publication')],
+
+    )
 
     const posts = response.results.map(post => (
         {
@@ -54,4 +55,4 @@ export const getStaticProps = async () => {
         }
     }
 }
-export default posts
+export default Posts

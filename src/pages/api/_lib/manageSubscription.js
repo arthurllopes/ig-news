@@ -22,14 +22,14 @@ export async function saveSubscription (subscriptionID, customerID, createAction
         status: subscription.status,
         price_id: subscription.items.data[0].price.id,
     }
-    if(createAction){
+  if(createAction){
       await faunadb.query(
           q.Create(
             q.Collection('SUBSCRIPTION'),
             { data: subscriptionData }
           )
       );
-    } else{
+  } else{
       await faunadb.query(
         q.Replace(
           q.Select(
@@ -44,5 +44,5 @@ export async function saveSubscription (subscriptionID, customerID, createAction
           { data: subscriptionData }
         )
       )
-    }   
+  }   
 }

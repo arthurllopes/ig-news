@@ -1,4 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
+
 import {buffer} from 'micro'
 import { stripe } from '../../services/stripe';
 import { saveSubscription } from './_lib/manageSubscription';
@@ -14,7 +15,7 @@ const relevantEvents = new Set([
   'customer.subscription.deleted'
 ])
 
-export default async (req, res) => {
+export default  async (req, res) => {
   if(req.method === 'POST'){
     const buf = await buffer(req);
     const sig = req.headers['stripe-signature'];
@@ -23,6 +24,7 @@ export default async (req, res) => {
 
     try {
       event = stripe.webhooks.constructEvent(buf.toString(), sig, process.env.STRIPE_WEBHOOK_SECRET);
+      console.log('evento funcionou')
     } catch(err) {
       console.log('deu 400')
       return res.status(400).send(`Webhook error: ${err.message}`);
@@ -32,11 +34,12 @@ export default async (req, res) => {
 
     if(relevantEvents.has(type)){
       try{
-        const subscription = event.data.object;
         switch (type) {
           case 'customer.subscription.updated':
           case 'customer.subscription.deleted':
-              await saveSubscription(subscription.id, subscription.customer.toString(),false)
+              console.log('evento atualizado')
+              const subscription = event.data.object;
+              await saveSubscription(subscription.id, subscription.customer.toString(), false)
             break;
           case 'checkout.session.completed':
             const checkoutSession = event.data.object
